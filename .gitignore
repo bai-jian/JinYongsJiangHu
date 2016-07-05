@@ -1,2 +1,5 @@
-# Input, novels and people name lists
-input
+# input, novels and people name lists
+input/
+
+# this file .gitignore
+.gitignore
