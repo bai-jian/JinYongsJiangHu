@@ -77,5 +77,14 @@
         <jarDirectory url="file:///home/hadoop2/hadoop/share/hadoop/mapreduce/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/ansj_seg-5.0.0-all-in-one.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
