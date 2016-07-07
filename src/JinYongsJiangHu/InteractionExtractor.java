@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 
 /**
  * Extract the interaction among characters in the novels.
@@ -34,23 +35,33 @@ public class InteractionExtractor {
             String names = context.getConfiguration().get("names");
             String[] nameList = names.split(",");
             for(String name : nameList) {
-                UserDefineLibrary.insertWord(name, "nr", 1000);
+                UserDefineLibrary.insertWord(name, "userDefine", 1000);
             }
         }
 
         public void map(LongWritable key, Text value, Context context)
                 throws IOException, InterruptedException {
+            // Get the keyOut
             FileSplit fileSplit = (FileSplit)context.getInputSplit();
             String fileName = fileSplit.getPath().getName();
             Text keyOut = new Text(fileName);
-            StringBuilder strBuilder = new StringBuilder("");
+            // Extract the valueOut (that's, names) from the line
+            // Use the Set data structure, avoiding duplicates
+            HashSet names = new HashSet();
             Result result = ToAnalysis.parse(value.toString());
             for(Term term : result) {
-                if (term.getNatureStr().equals("nr"))
-                    strBuilder.append(term.getName() + " ");
+                if (term.getNatureStr().equals("userDefine"))
+                    names.add(term.getName());
             }
-            Text valueOut = new Text(strBuilder.toString().trim());
-            context.write(keyOut, valueOut);
+            // The output line must contain not less than 2 names
+            if (names.size() >= 2) {
+                StringBuilder strBuilder = new StringBuilder("");
+                for(Object name: names) {
+                    strBuilder.append(name + " ");
+                }
+                Text valueOut = new Text(strBuilder.toString().trim());
+                context.write(keyOut, valueOut);
+            }
         }
     }
 
