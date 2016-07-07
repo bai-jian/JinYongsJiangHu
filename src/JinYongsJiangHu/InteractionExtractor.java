@@ -1,5 +1,9 @@
 package JinYongsJiangHu;
 
+import org.ansj.domain.Result;
+import org.ansj.domain.Term;
+import org.ansj.library.UserDefineLibrary;
+import org.ansj.splitWord.analysis.ToAnalysis;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -8,6 +12,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
@@ -23,14 +28,38 @@ import java.io.IOException;
 public class InteractionExtractor {
 
     public static class InteractionExtractMapper extends Mapper<LongWritable, Text, Text, Text> {
-        public void map(LongWritable key, Text value, Context context) {
 
+        protected void setup(org.apache.hadoop.mapreduce.Mapper.Context context)
+                throws IOException, InterruptedException {
+            String names = context.getConfiguration().get("names");
+            String[] nameList = names.split(",");
+            for(String name : nameList) {
+                UserDefineLibrary.insertWord(name, "nr", 1000);
+            }
+        }
+
+        public void map(LongWritable key, Text value, Context context)
+                throws IOException, InterruptedException {
+            FileSplit fileSplit = (FileSplit)context.getInputSplit();
+            String fileName = fileSplit.getPath().getName();
+            Text keyOut = new Text(fileName);
+            StringBuilder strBuilder = new StringBuilder("");
+            Result result = ToAnalysis.parse(value.toString());
+            for(Term term : result) {
+                if (term.getNatureStr().equals("nr"))
+                    strBuilder.append(term.getName() + " ");
+            }
+            Text valueOut = new Text(strBuilder.toString().trim());
+            context.write(keyOut, valueOut);
         }
     }
 
     public static class InteractionExtractReducer extends Reducer<Text, Text, Text, Text> {
-        public void reduce(Text key, Iterable<Text> values, Context context) {
-
+        public void reduce(Text key, Iterable<Text> values, Context context)
+                throws IOException, InterruptedException {
+            for(Text value: values) {
+                context.write(key, value);
+            }
         }
     }
 
@@ -42,7 +71,7 @@ public class InteractionExtractor {
                 System.err.println("usage");
                 System.exit(2);
             }
-            Job job = new Job(conf, "JinYong'sJiangHu_Job1_InteractionExtractor");
+            Job job = new Job(conf, "JinYongsJiangHu_Job1_InteractionExtractor");
             job.setJarByClass(InteractionExtractor.class);
             job.getConfiguration().set("names", readNames(otherArgs[0]));
             job.setMapperClass(InteractionExtractMapper.class);
