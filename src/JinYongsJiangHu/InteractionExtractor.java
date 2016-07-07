@@ -67,7 +67,7 @@ public class InteractionExtractor {
         try {
             Configuration conf = new Configuration();
             String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
-            if (otherArgs.length != 2) {
+            if (otherArgs.length != 3) {
                 System.err.println("usage");
                 System.exit(2);
             }
@@ -75,7 +75,11 @@ public class InteractionExtractor {
             job.setJarByClass(InteractionExtractor.class);
             job.getConfiguration().set("names", readNames(otherArgs[0]));
             job.setMapperClass(InteractionExtractMapper.class);
+            job.setMapOutputKeyClass(Text.class);
+            job.setMapOutputValueClass(Text.class);
             job.setReducerClass(InteractionExtractReducer.class);
+            job.setOutputKeyClass(Text.class);
+            job.setOutputValueClass(Text.class);
             FileInputFormat.addInputPath(job, new Path(otherArgs[1]));
             FileOutputFormat.setOutputPath(job, new Path(otherArgs[2]));
             job.waitForCompletion(true);
