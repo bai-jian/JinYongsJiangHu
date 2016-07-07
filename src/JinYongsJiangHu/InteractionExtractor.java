@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Extract the interaction among characters in the novels.
@@ -35,7 +36,7 @@ public class InteractionExtractor {
             String names = context.getConfiguration().get("names");
             String[] nameList = names.split(",");
             for(String name : nameList) {
-                UserDefineLibrary.insertWord(name, "userDefine", 1000);
+                UserDefineLibrary.insertWord(name, "nr", 1000000);
             }
         }
 
@@ -50,16 +51,18 @@ public class InteractionExtractor {
             HashSet names = new HashSet();
             Result result = ToAnalysis.parse(value.toString());
             for(Term term : result) {
-                if (term.getNatureStr().equals("userDefine"))
+                if (term.getNatureStr().equals("nr"))
                     names.add(term.getName());
             }
             // The output line must contain not less than 2 names
             if (names.size() >= 2) {
                 StringBuilder strBuilder = new StringBuilder("");
-                for(Object name: names) {
-                    strBuilder.append(name + " ");
+                Iterator iter = names.iterator();
+                strBuilder.append(iter.next());
+                while(iter.hasNext()) {
+                    strBuilder.append(" " + iter.next());
                 }
-                Text valueOut = new Text(strBuilder.toString().trim());
+                Text valueOut = new Text(strBuilder.toString());
                 context.write(keyOut, valueOut);
             }
         }
