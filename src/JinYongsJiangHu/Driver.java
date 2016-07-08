@@ -22,5 +22,10 @@ public class Driver {
         CharacterCooccurrence.main(args4CharacterCooccurrence);
         System.out.println("CharacterCooccurrence finishes successfully...");
 
+        System.out.println("CharacterRelationGraph begins...");
+        String[] args4CharacterRelationGraph = {"./temp/temp2", "./temp/temp3"};
+        CharacterRelationGraph.main(args4CharacterRelationGraph);
+        System.out.println("CharacterRelationGraph finishes successfully...");
+
     }
 }

@@ -60,7 +60,7 @@ public class InteractionExtractor {
                 Iterator iter = names.iterator();
                 strBuilder.append(iter.next());
                 while(iter.hasNext()) {
-                    strBuilder.append(" " + iter.next());
+                    strBuilder.append("," + iter.next());
                 }
                 Text valueOut = new Text(strBuilder.toString());
                 context.write(keyOut, valueOut);
