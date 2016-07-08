@@ -28,8 +28,11 @@ public class CharacterCooccurrence {
             String[] names = value.toString().split(",");
             for(int i = 0; i < names.length; ++i) {
                 for(int j = i + 1; j < names.length; ++j) {
-                    Text keyOut = new Text(names[i] + "," + names[j]);
-                    context.write(keyOut, one);
+                    // Judge not equal to avoid diagonals in the matrix and loops in the graph
+                    if (!names[i].equals(names[j])) {
+                        Text keyOut = new Text(names[i] + "," + names[j]);
+                        context.write(keyOut, one);
+                    }
                 }
             }
         }
