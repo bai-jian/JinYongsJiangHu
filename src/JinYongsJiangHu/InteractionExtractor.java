@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -49,7 +50,9 @@ public class InteractionExtractor {
             Text keyOut = new Text(fileName);
             // Extract the valueOut (that's, names) from the line
             // Use the Set data structure, avoiding duplicates
-            HashSet names = new HashSet();
+            // HashSet names = new HashSet();
+            // Use the List data structure, allowing duplicates
+            ArrayList<String> names = new ArrayList<>();
             // Use DicAnalysis instead of ToAnalysis to improve the priority of the 'characters' nature
             // Result result = ToAnalysis.parse(value.toString());
             Result result = DicAnalysis.parse(value.toString());
