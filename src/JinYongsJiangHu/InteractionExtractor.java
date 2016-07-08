@@ -3,6 +3,7 @@ package JinYongsJiangHu;
 import org.ansj.domain.Result;
 import org.ansj.domain.Term;
 import org.ansj.library.UserDefineLibrary;
+import org.ansj.splitWord.analysis.DicAnalysis;
 import org.ansj.splitWord.analysis.ToAnalysis;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -36,7 +37,7 @@ public class InteractionExtractor {
             String names = context.getConfiguration().get("names");
             String[] nameList = names.split(",");
             for(String name : nameList) {
-                UserDefineLibrary.insertWord(name, "nr", 1000000);
+                UserDefineLibrary.insertWord(name, "characters", 1000);
             }
         }
 
@@ -49,9 +50,11 @@ public class InteractionExtractor {
             // Extract the valueOut (that's, names) from the line
             // Use the Set data structure, avoiding duplicates
             HashSet names = new HashSet();
-            Result result = ToAnalysis.parse(value.toString());
+            // Use DicAnalysis instead of ToAnalysis to improve the priority of the 'characters' nature
+            // Result result = ToAnalysis.parse(value.toString());
+            Result result = DicAnalysis.parse(value.toString());
             for(Term term : result) {
-                if (term.getNatureStr().equals("nr"))
+                if (term.getNatureStr().equals("characters"))
                     names.add(term.getName());
             }
             // The output line must contain not less than 2 names
