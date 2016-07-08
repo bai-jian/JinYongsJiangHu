@@ -13,9 +13,14 @@ public class Driver {
         );
 
         System.out.println("InteractionExtractor begins...");
-        String[] args4InteractionExtractor = {"./input/people_name_list.txt", "./input/novels", "./output"};
+        String[] args4InteractionExtractor = {"./input/people_name_list.txt", "./input/novels", "./temp/temp1"};
         InteractionExtractor.main(args4InteractionExtractor);
-        System.out.println("InteractionExtractor finished successfully...");
+        System.out.println("InteractionExtractor finishes successfully...");
+
+        System.out.println("CharacterCooccurrence begins...");
+        String[] args4CharacterCooccurrence = {"./temp/temp1", "./temp/temp2"};
+        CharacterCooccurrence.main(args4CharacterCooccurrence);
+        System.out.println("CharacterCooccurrence finishes successfully...");
 
     }
 }
