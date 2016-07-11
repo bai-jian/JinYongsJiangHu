@@ -49,7 +49,7 @@ public class PageRankIter {
                 if (lists[0].equals("src")) {
                     pr += d * Double.parseDouble(lists[2]);
                 } else {
-                    pr += (1 - d) / (lists.length - 1);
+                    pr += 1 - d;
                     strBuilder.append(value.toString());
                 }
             }

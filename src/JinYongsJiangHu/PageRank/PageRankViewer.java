@@ -18,15 +18,25 @@ import java.io.IOException;
  */
 public class PageRankViewer {
 
-    static class PageRankViewerMapper extends Mapper<Text, Text, DoubleWritable, Text> {
+    static class MyDoubleWritable extends DoubleWritable {
+        @Override
+        public int compareTo(DoubleWritable o) {
+            return -super.compareTo(o);
+        }
+    }
+
+    static class PageRankViewerMapper extends Mapper<Text, Text, MyDoubleWritable, Text> {
         public void map(Text key, Text value, Context context)
                 throws IOException, InterruptedException {
             double pr = Double.parseDouble(value.toString().split(",")[0]);
-            DoubleWritable keyOut = new DoubleWritable(pr);
+            MyDoubleWritable keyOut = new MyDoubleWritable();
+            keyOut.set(pr);
             Text valueOut = key;
             context.write(keyOut, valueOut);
         }
     }
+
+
 
     public static void main(String[] args) {
         try {
@@ -40,7 +50,7 @@ public class PageRankViewer {
             job.setJarByClass(PageRankViewer.class);
             job.setInputFormatClass(KeyValueTextInputFormat.class);
             job.setMapperClass(PageRankViewerMapper.class);
-            job.setMapOutputKeyClass(DoubleWritable.class);
+            job.setMapOutputKeyClass(MyDoubleWritable.class);
             job.setMapOutputValueClass(Text.class);
             FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
             FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
