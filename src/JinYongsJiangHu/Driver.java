@@ -16,8 +16,8 @@ public class Driver {
 
         /*
         System.out.println("InteractionExtractor begins...");
-        String[] args4InteractionExtractor = {"./input/people_name_list.txt", "./input/novels", "./temp/temp1"};
-        // String[] args4InteractionExtractor = {"./testInput/people_name_list.txt", "./testInput/novels", "./temp/temp1"};
+        // String[] args4InteractionExtractor = {"./input/people_name_list.txt", "./input/novels", "./temp/temp1"};
+        String[] args4InteractionExtractor = {"./testInput/people_name_list.txt", "./testInput/novels", "./temp/temp1"};
         InteractionExtractor.main(args4InteractionExtractor);
         System.out.println("InteractionExtractor finishes successfully...");
 
@@ -32,8 +32,9 @@ public class Driver {
         System.out.println("CharacterRelationGraph finishes successfully...");
         */
 
+
         System.out.println("PageRank begins...");
-        String[] args4PageRank = { };
+        String[] args4PageRank = {"./temp/temp3", "./temp/temp4/"};
         PageRankDriver.main(args4PageRank);
         System.out.println("PageRank finishes successfully...");
 
