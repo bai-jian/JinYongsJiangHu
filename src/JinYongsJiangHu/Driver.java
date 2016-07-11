@@ -14,7 +14,6 @@ public class Driver {
                 "-- Analyse the relation of characters in JinYong's novels. --" + '\n'
         );
 
-        /*
         System.out.println("InteractionExtractor begins...");
         // String[] args4InteractionExtractor = {"./input/people_name_list.txt", "./input/novels", "./temp/temp1"};
         String[] args4InteractionExtractor = {"./testInput/people_name_list.txt", "./testInput/novels", "./temp/temp1"};
@@ -30,11 +29,9 @@ public class Driver {
         String[] args4CharacterRelationGraph = {"./temp/temp2", "./temp/temp3"};
         CharacterRelationGraph.main(args4CharacterRelationGraph);
         System.out.println("CharacterRelationGraph finishes successfully...");
-        */
-
 
         System.out.println("PageRank begins...");
-        String[] args4PageRank = {"./temp/temp3", "./temp/temp4/"};
+        String[] args4PageRank = {"./temp/temp3", "./temp/temp3.", "./temp/temp4", "./temp/temp6-1"};
         PageRankDriver.main(args4PageRank);
         System.out.println("PageRank finishes successfully...");
 
