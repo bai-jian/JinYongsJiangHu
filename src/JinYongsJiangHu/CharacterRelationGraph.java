@@ -67,7 +67,7 @@ public class CharacterRelationGraph {
                 Pair<String, Integer> pair = iter.next();
                 String name = pair.getFirst();
                 double freq = pair.getSecond() / sum;
-                strBuilder.append('|' + name + ':' + freq);
+                strBuilder.append(',' + name + ':' + freq);
             }
             Text valueOut = new Text(strBuilder.toString());
             context.write(key, valueOut);
