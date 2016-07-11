@@ -19,16 +19,10 @@ public class GraphBuilder {
     static class GraphBuildMapper extends Mapper<Text, Text, Text, Text> {
         public void map(Text key, Text value, Context context)
                 throws IOException, InterruptedException {
-            StringBuilder strBuilder = new StringBuilder("");
+            StringBuilder strBuilder = new StringBuilder("1.0");
             String[] pairs = value.toString().split(",");
-            boolean first = true;
             for(String pair : pairs) {
-                if (first) {
-                    strBuilder.append(pair.split(":")[0]);
-                    first = false;
-                } else {
-                    strBuilder.append("," + pair.split(":")[0]);
-                }
+                strBuilder.append("," + pair.split(":")[0]);
             }
             Text valueOut = new Text(strBuilder.toString());
             context.write(key, valueOut);
