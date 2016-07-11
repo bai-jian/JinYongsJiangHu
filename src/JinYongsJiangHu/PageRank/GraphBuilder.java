@@ -8,6 +8,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.KeyValueTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.util.GenericOptionsParser;
 
 import java.io.IOException;
 
@@ -32,7 +33,8 @@ public class GraphBuilder {
     public static void main(String[] args) {
         try {
             Configuration conf = new Configuration();
-            if (args.length < 2) {
+            String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
+            if (otherArgs.length < 2) {
                 System.err.println("usage: GraphBuilder <in> <out>");
                 System.exit(0);
             }
@@ -42,8 +44,8 @@ public class GraphBuilder {
             job.setMapperClass(GraphBuildMapper.class);
             job.setMapOutputKeyClass(Text.class);
             job.setMapOutputValueClass(Text.class);
-            FileInputFormat.addInputPath(job, new Path(args[0]));
-            FileOutputFormat.setOutputPath(job, new Path(args[1]));
+            FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
+            FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
             job.waitForCompletion(true);
         } catch (IOException e) {
             e.printStackTrace();
