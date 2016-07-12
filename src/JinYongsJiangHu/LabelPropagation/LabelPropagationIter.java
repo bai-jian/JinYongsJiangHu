@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static javafx.scene.input.KeyCode.T;
 
 /**
  * Created by lubuntu on 16-7-12.
