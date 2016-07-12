@@ -30,12 +30,12 @@ public class Driver {
         String[] args4CharacterRelationGraph = {"./temp/temp2", "./temp/temp3"};
         CharacterRelationGraph.main(args4CharacterRelationGraph);
         System.out.println("CharacterRelationGraph finishes successfully...");
-        /*
+
         System.out.println("PageRank begins...");
         String[] args4PageRank = {"./temp/temp3", "./temp/temp4.", "./temp/temp4", "./temp/temp6-1"};
         PageRankDriver.main(args4PageRank);
         System.out.println("PageRank finishes successfully...");
-        */
+
         System.out.println("LabelPropagation begins...");
         String[] args4LabelPropagation = {"./temp/temp3", "./temp/temp5.", "./temp/temp5", "./temp/temp6-2"};
         LabelPropagationDriver.main(args4LabelPropagation);

@@ -5,7 +5,7 @@ package JinYongsJiangHu.PageRank;
  */
 public class PageRankDriver {
 
-    private static int times = 100;
+    private static int times = 10;
 
     public static void main(String[] args) {
         if (args.length < 4) {
