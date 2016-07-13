@@ -97,8 +97,8 @@ public class JinYongsJiangHu {
 
     /**
      * Character Co-occurrence Matrix
-     * @param cil: Character Interaction List, ArrayList<ArrayList<String>>
-     * @return ccm: Character Co-occurrence Matrix, Map<Pair<String, String>, Integer>>
+     * @param cil Character Interaction List, ArrayList<ArrayList<String>>
+     * @return ccm Character Co-occurrence Matrix, Map<Pair<String, String>, Integer>
      */
     private static Map<Pair<String, String>, Integer> characterCooccurrenceMatrix(ArrayList<ArrayList<String>> cil) {
         // Character Co-occurrence Matrix
@@ -116,5 +116,16 @@ public class JinYongsJiangHu {
             }
         }
         return ccm;
+    }
+
+    /**
+     * Character Relation Graph
+     * @param ccm Character Co-occurrence Matrix, Map<Pair<String, String>, Integer>
+     * @return crg Character Relation Graph, Map<String, ArrayList<Pair<String, Double>>>
+     */
+    private static Map<String, ArrayList<Pair<String, Double>>> characterRelationGraph(Map<Pair<String, String>, Integer> ccm) {
+        Map<String, ArrayList<Pair<String, Double>>> crg = new HashMap();
+        
+        return crg;
     }
 }
