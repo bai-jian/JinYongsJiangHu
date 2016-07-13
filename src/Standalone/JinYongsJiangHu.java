@@ -125,7 +125,7 @@ public class JinYongsJiangHu {
      */
     private static Map<String, ArrayList<Pair<String, Double>>> characterRelationGraph(Map<Pair<String, String>, Integer> ccm) {
         Map<String, ArrayList<Pair<String, Double>>> crg = new HashMap();
-        
+
         return crg;
     }
 }
