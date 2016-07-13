@@ -6,6 +6,7 @@ import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.KeyValueTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -36,7 +37,30 @@ public class PageRankViewer {
         }
     }
 
+    /*
+    static class PageRankViewerReducer extends Reducer<MyDoubleWritable, Text, Text, MyDoubleWritable> {
+        public void reduce(MyDoubleWritable key, Iterable<Text> values, Context context)
+                throws IOException, InterruptedException {
+            for(Text value: values) {
+                context.write(value, key);
+            }
+        }
+    }
+    */
 
+    static class PageRankViewerReducer extends Reducer<MyDoubleWritable, Text, Text, Text> {
+        public void reduce(MyDoubleWritable key, Iterable<Text> values, Context context)
+                throws IOException, InterruptedException {
+            Text keyOut = new Text();
+            Text valueOut = new Text("");
+            for(Text value: values) {
+                for(int i = 0; i < key.get() * 10; ++i) {
+                    keyOut.set(value);
+                    context.write(keyOut, valueOut);
+                }
+            }
+        }
+    }
 
     public static void main(String[] args) {
         try {
@@ -48,11 +72,12 @@ public class PageRankViewer {
             }
             Job job = new Job(conf, "JinYongsJiangHu_Job4_PageRank.PageRankViewer");
             job.setJarByClass(PageRankViewer.class);
+            FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
             job.setInputFormatClass(KeyValueTextInputFormat.class);
             job.setMapperClass(PageRankViewerMapper.class);
             job.setMapOutputKeyClass(MyDoubleWritable.class);
             job.setMapOutputValueClass(Text.class);
-            FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
+            job.setReducerClass(PageRankViewerReducer.class);
             FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
             job.waitForCompletion(true);
         } catch (IOException e) {
