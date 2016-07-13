@@ -26,7 +26,7 @@ public class JinYongsJiangHu {
         System.out.println("Character interaction list begins...");
         ArrayList<ArrayList<String>> cil = characterInteractionList("./input/novels", "./input/people_name_list.txt");
         // ArrayList<ArrayList<String>> cil = characterInteractionList("./testInput/novels", "./testInput/people_name_list.txt");
-        System.out.println("Character interaction list prints below...");
+        /* System.out.println("Character interaction list prints below...");
         Iterator<ArrayList<String>> iter = cil.iterator();
         while(iter.hasNext()) {
             Iterator<String> jter = iter.next().iterator();
@@ -34,12 +34,18 @@ public class JinYongsJiangHu {
                 System.out.print(jter.next() + " ");
             }
             System.out.print("\n");
-        }
+        } */
         System.out.println("Character interaction list finishes successfully...");
 
 
     }
 
+    /**
+     * Character Interaction List
+     * @param novelsPath the path of novels
+     * @param namesFile the file of character names
+     * @return cil(character interaction list), a 2D ArrayList
+     */
     private static ArrayList<ArrayList<String>> characterInteractionList(String novelsPath, String namesFile) {
         // Insert the names into the dictionary
         File file = new File(namesFile);
