@@ -4,10 +4,13 @@ import org.ansj.domain.Result;
 import org.ansj.domain.Term;
 import org.ansj.library.UserDefineLibrary;
 import org.ansj.splitWord.analysis.DicAnalysis;
+import org.apache.commons.math3.util.Pair;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by lubuntu on 16-7-13.
@@ -26,7 +29,7 @@ public class JinYongsJiangHu {
         System.out.println("Character interaction list begins...");
         ArrayList<ArrayList<String>> cil = characterInteractionList("./input/novels", "./input/people_name_list.txt");
         // ArrayList<ArrayList<String>> cil = characterInteractionList("./testInput/novels", "./testInput/people_name_list.txt");
-        /* System.out.println("Character interaction list prints below...");
+        System.out.println("Character interaction list prints below...");
         Iterator<ArrayList<String>> iter = cil.iterator();
         while(iter.hasNext()) {
             Iterator<String> jter = iter.next().iterator();
@@ -34,9 +37,16 @@ public class JinYongsJiangHu {
                 System.out.print(jter.next() + " ");
             }
             System.out.print("\n");
-        } */
+        }
         System.out.println("Character interaction list finishes successfully...");
 
+        System.out.println("Character co-occurrence matrix begins...");
+        Map<Pair<String, String>, Integer> ccm = characterCooccurrenceMatrix(cil);
+        System.out.println("Character co-occurrence matrix prints below...");
+        for(Map.Entry<Pair<String, String>, Integer> e : ccm.entrySet()) {
+            System.out.println("<" + e.getKey().getFirst() + "," + e.getKey().getSecond() + ">\t" + e.getValue());
+        }
+        System.out.println("Character co-occurrence matrix finishes successfully...");
 
     }
 
@@ -44,7 +54,7 @@ public class JinYongsJiangHu {
      * Character Interaction List
      * @param novelsPath the path of novels
      * @param namesFile the file of character names
-     * @return cil(character interaction list), a 2D ArrayList
+     * @return cil(character interaction list), ArrayList<ArrayList<String>>
      */
     private static ArrayList<ArrayList<String>> characterInteractionList(String novelsPath, String namesFile) {
         // Insert the names into the dictionary
@@ -83,5 +93,28 @@ public class JinYongsJiangHu {
             }
         }
         return cil;
+    }
+
+    /**
+     * Character Co-occurrence Matrix
+     * @param cil: Character Interaction List, ArrayList<ArrayList<String>>
+     * @return ccm: Character Co-occurrence Matrix, Map<Pair<String, String>, Integer>>
+     */
+    private static Map<Pair<String, String>, Integer> characterCooccurrenceMatrix(ArrayList<ArrayList<String>> cil) {
+        // Character Co-occurrence Matrix
+        Map<Pair<String, String>, Integer> ccm = new HashMap<>();
+        for(int i = 0; i < cil.size(); ++i) {
+            ArrayList<String> list = cil.get(i);
+            for(int j = 0; j < list.size(); ++j) {
+                for(int k = j + 1; k < list.size(); ++k) {
+                    if (!list.get(j).equals(list.get(k))) {
+                        Pair<String, String> key = new Pair(list.get(j), list.get(k));
+                        Integer value = ccm.get(key);
+                        ccm.put(key, value == null ? 1 : value + 1);
+                    }
+                }
+            }
+        }
+        return ccm;
     }
 }
