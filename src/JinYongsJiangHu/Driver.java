@@ -10,9 +10,11 @@ public class Driver {
 
     public static void main(String[] args) {
         System.out.println(
-                "Welcome to --" + '\n' +
-                "********************* JinYong's JiangHu *********************" + '\n' +
-                "-- Analyse the relation of characters in JinYong's novels. --" + '\n'
+                "**************************************************************" + '\n' +
+                "********** Welcome to JinYong's JiangHu (MapReduce) **********" + '\n' +
+                "***********************  金 庸 的 江 湖  **********************" + '\n' +
+                "*** Analyse the relation of characters in JinYong's novels. **" + '\n' +
+                "**************************************************************" + '\n'
         );
 
         System.out.println("InteractionExtractor begins...");
