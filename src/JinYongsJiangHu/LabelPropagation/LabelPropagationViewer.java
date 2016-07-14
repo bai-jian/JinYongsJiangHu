@@ -18,7 +18,7 @@ import java.util.Iterator;
  * Created by lubuntu on 16-7-12.
  */
 public class LabelPropagationViewer {
-    
+
     static class LabelPropagationViewerMapper extends Mapper<Text, Text, Text, Text> {
         public void map(Text key, Text value, Context context)
                 throws IOException, InterruptedException {

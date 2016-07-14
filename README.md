@@ -14,3 +14,6 @@ Analyse the relation of characters in JinYong's novels.
 |MapReduce|[Apache Hadoop 2.7.2](http://hadoop.apache.org/)|
 |NLP/Segmentation|[ansj_seg5.0.0](https://github.com/NLPchina/ansj_seg)|
 
+Data Visualization
++ Word Cloud, [Tagxedo](http://www.tagxedo.com/)
++ Graph Viz, [Gephi](https://gephi.org/)
