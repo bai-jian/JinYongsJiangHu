@@ -37,7 +37,7 @@ public class PageRankViewer {
         }
     }
 
-    /*
+
     static class PageRankViewerReducer extends Reducer<MyDoubleWritable, Text, Text, MyDoubleWritable> {
         public void reduce(MyDoubleWritable key, Iterable<Text> values, Context context)
                 throws IOException, InterruptedException {
@@ -46,8 +46,10 @@ public class PageRankViewer {
             }
         }
     }
-    */
 
+
+    /*
+    // The reducer is to prepare the file to generate Word Cloud.
     static class PageRankViewerReducer extends Reducer<MyDoubleWritable, Text, Text, Text> {
         public void reduce(MyDoubleWritable key, Iterable<Text> values, Context context)
                 throws IOException, InterruptedException {
@@ -61,6 +63,7 @@ public class PageRankViewer {
             }
         }
     }
+    */
 
     public static void main(String[] args) {
         try {
