@@ -25,7 +25,7 @@ public class Driver {
         }
 
         System.out.println("InteractionExtractor begins...");
-        String[] args4InteractionExtractor = {args[0], args[1] + "/novels", args[2] + "/temp1"};
+        String[] args4InteractionExtractor = {args[0], args[1], args[2] + "/temp1"};
         InteractionExtractor.main(args4InteractionExtractor);
         System.out.println("InteractionExtractor finishes successfully...");
 
