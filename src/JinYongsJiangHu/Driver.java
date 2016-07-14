@@ -18,6 +18,8 @@ public class Driver {
         );
 
         if (args.length < 2) {
+            // In Apache Hadoop MapReduce, <character_list> is in Linux FS while <novels> is in HDFS.
+            // So, they have to be separated.
             System.err.println("usage: JinYong'sJiangHu <character_list> <novels> <out>");
             System.exit(2);
         }
