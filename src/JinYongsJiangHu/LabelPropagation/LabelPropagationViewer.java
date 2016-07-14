@@ -19,6 +19,7 @@ import java.util.Iterator;
  */
 public class LabelPropagationViewer {
 
+
     static class LabelPropagationViewerMapper extends Mapper<Text, Text, Text, Text> {
         public void map(Text key, Text value, Context context)
                 throws IOException, InterruptedException {
@@ -45,6 +46,30 @@ public class LabelPropagationViewer {
         }
     }
 
+    /*
+    // The mapper is to prepare the files to visualize the community graph
+    static class LabelPropagationViewerMapper extends Mapper<Text, Text, Text, Text> {
+        public void map(Text key, Text value, Context context)
+                throws IOException, InterruptedException {
+            Text keyOut = new Text();
+            Text valueOut = new Text();
+            // nodes
+            String[] list = value.toString().split(",");
+            String label = list[0];
+            int size = list.length - 1;
+            keyOut.set("node\t" + key);
+            valueOut.set(label + "\t" + size);
+            context.write(keyOut, valueOut);
+            // edges
+            for(int i = 1; i < list.length; ++i) {
+                keyOut.set("edge\t" + key.toString() + "\t" + list[i]);
+                valueOut.set("Undirected");
+                context.write(keyOut, valueOut);
+            }
+        }
+    }
+    */
+
     public static void main(String[] args) {
         try {
             Configuration conf = new Configuration();
@@ -60,7 +85,7 @@ public class LabelPropagationViewer {
             job.setMapperClass(LabelPropagationViewerMapper.class);
             job.setMapOutputKeyClass(Text.class);
             job.setMapOutputValueClass(Text.class);
-            job.setReducerClass(LabelPropagationViewerReducer.class);
+            // job.setReducerClass(LabelPropagationViewerReducer.class);
             FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
             job.waitForCompletion(true);
         } catch (IOException e) {
