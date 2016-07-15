@@ -19,7 +19,7 @@ public class Driver {
 
         if (args.length < 2) {
             // In Apache Hadoop MapReduce, <character_list> is in Linux FS while <novels> is in HDFS.
-            // So, they have to be separated.
+            // So, the two arguments have to be separated.
             System.err.println("usage: JinYong'sJiangHu <character_list> <novels> <out>");
             System.exit(2);
         }
@@ -48,5 +48,13 @@ public class Driver {
         String[] args4LabelPropagation = {args[2] + "/temp3", args[2] + "/temp5.", args[2] + "/temp5", args[2] + "/temp6-2"};
         LabelPropagationDriver.main(args4LabelPropagation);
         System.out.println("LabelPropagation finishes successfully...");
+
+        System.out.println(
+                "**************************************************************" + '\n' +
+                "*** Analyse the relation of characters in JinYong's novels. **" + '\n' +
+                "***********************  金 庸 的 江 湖  **********************" + '\n' +
+                "********** Good bye, JinYong's JiangHu (MapReduce) ***********" + '\n' +
+                "**************************************************************" + '\n'
+        );
     }
 }
