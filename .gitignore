@@ -1,5 +1,6 @@
 # input, novels and people name lists
 input/
+testInput/
 
 # this file .gitignore
 .gitignore
