@@ -9,6 +9,8 @@ import JinYongsJiangHu.PageRank.PageRankDriver;
 public class Driver {
 
     public static void main(String[] args) {
+        long tStart = System.currentTimeMillis();
+
         System.out.println(
                 "**************************************************************" + '\n' +
                 "********** Welcome to JinYong's JiangHu (MapReduce) **********" + '\n' +
@@ -56,5 +58,9 @@ public class Driver {
                 "********** Good bye, JinYong's JiangHu (MapReduce) ***********" + '\n' +
                 "**************************************************************" + '\n'
         );
+
+        long tEnd = System.currentTimeMillis();
+        long tDelta = tEnd - tStart;
+        System.out.println("\nThe elapsed time is " + tDelta / 1000.0 + "s.\n");
     }
 }
