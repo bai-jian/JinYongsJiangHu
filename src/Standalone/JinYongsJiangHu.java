@@ -7,10 +7,7 @@ import org.ansj.splitWord.analysis.DicAnalysis;
 import org.apache.commons.math3.util.Pair;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by lubuntu on 16-7-13.
@@ -237,9 +234,16 @@ public class JinYongsJiangHu {
             }
         }
         // PageRankViewer
+        List<Map.Entry<String, Double>> list = new ArrayList(pageRank.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
+            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
+                return - o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        // Output the result into the given file
         try {
             PrintWriter writer = new PrintWriter(outputPath + "/PageRank", "UTF-8");
-            for(Map.Entry<String, Double> e : pageRank.entrySet()) {
+            for(Map.Entry<String, Double> e : list) {
                 writer.println(e.getKey() + "\t" + e.getValue());
             }
             writer.close();
