@@ -196,9 +196,9 @@ public class JinYongsJiangHu {
      * Page Rank
      * @param crg Character Relation Graph, ArrayList<Pair<String,Double>>>
      * @param times the times of iteration
-     * @param output the name of output file
+     * @param outputPath the name of output path
      */
-    static void pageRank(Map<String, ArrayList<Pair<String,Double>>> crg, int times, double d, String output) {
+    private static void pageRank(Map<String, ArrayList<Pair<String,Double>>> crg, int times, double d, String outputPath) {
         // GraphBuilder
         Map<String, ArrayList<String>> graph = new HashMap();
         for(Map.Entry<String, ArrayList<Pair<String, Double>>> e : crg.entrySet()) {
@@ -225,13 +225,15 @@ public class JinYongsJiangHu {
             }
         }
         // PageRankViewer
-        FileWriter writer = null;
         try {
-            writer = new FileWriter(output);
+            PrintWriter writer = new PrintWriter(outputPath + "/PageRank", "UTF-8");
             for(Map.Entry<String, Double> e : pageRank.entrySet()) {
-                writer.write(e.getKey() + "\t" + e.getValue() + "\n");
+                writer.println(e.getKey() + "\t" + e.getValue());
             }
-        } catch (IOException e) {
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
