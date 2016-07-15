@@ -15,6 +15,8 @@ import java.util.*;
 public class JinYongsJiangHu {
 
     public static void main(String[] args) {
+        long tStart = System.currentTimeMillis();
+
         System.out.println(
                 "**************************************************************" + '\n' +
                 "********** Welcome to JinYong's JiangHu (Standalone) *********" + '\n' +
@@ -23,14 +25,23 @@ public class JinYongsJiangHu {
                 "**************************************************************" + '\n'
         );
 
-        boolean debug = true;
+        boolean debug = true, timer = false;
         if (args.length < 3) {
-            System.err.println("usage: JinYong'sJiangHu <character_list> <novels> <out> [<debug>]");
+            System.err.println("usage: JinYong'sJiangHu <character_list> <novels> <out> [<debug> <timer>]");
             System.exit(2);
-        } else if (args.length == 3) {
-            debug = true;
-        } else if (args.length == 4) {
-            debug = Boolean.parseBoolean(args[3]);
+        } else {
+            if (args.length == 3) {
+                debug = true;
+                timer = false;
+            }
+            if (args.length == 4) {
+                debug = Boolean.parseBoolean(args[3]);
+                timer = false;
+            }
+            if (args.length == 5) {
+                debug = Boolean.parseBoolean(args[3]);
+                timer = Boolean.parseBoolean(args[4]);
+            }
         }
 
         System.out.println("Character interaction list begins...");
@@ -90,6 +101,12 @@ public class JinYongsJiangHu {
                 "********** Good bye, JinYong's JiangHu (Standalone) **********" + '\n' +
                 "**************************************************************" + '\n'
         );
+        
+        if (timer) {
+            long tEnd = System.currentTimeMillis();
+            long tDelta = tEnd - tStart;
+            System.out.println("\nThe elapsed time is " + tDelta / 1000.0 + ".\n");
+        }
     }
 
     /**
