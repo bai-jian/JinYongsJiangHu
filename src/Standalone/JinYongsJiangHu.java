@@ -66,6 +66,13 @@ public class JinYongsJiangHu {
         }
         System.out.println("Character relation graph finishes successfully...");
 
+        System.out.println(
+                "**************************************************************" + '\n' +
+                "*** Analyse the relation of characters in JinYong's novels. **" + '\n' +
+                "***********************  金 庸 的 江 湖  **********************" + '\n' +
+                "********** Good bye, JinYong's JiangHu (Standalone) **********" + '\n' +
+                "**************************************************************" + '\n'
+        );
     }
 
     /**
