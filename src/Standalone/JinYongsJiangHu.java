@@ -26,9 +26,13 @@ public class JinYongsJiangHu {
                 "**************************************************************" + '\n'
         );
 
+        if (args.length < 2) {
+            System.err.println("usage: JinYong'sJiangHu <character_list> <novels> <out>");
+            System.exit(2);
+        }
+
         System.out.println("Character interaction list begins...");
-        // ArrayList<ArrayList<String>> cil = characterInteractionList("./input/novels", "./input/people_name_list.txt");
-        ArrayList<ArrayList<String>> cil = characterInteractionList("./testInput/novels", "./testInput/people_name_list.txt");
+        ArrayList<ArrayList<String>> cil = characterInteractionList(args[0], args[1]);
         System.out.println("Character interaction list prints below...");
         Iterator<ArrayList<String>> iter = cil.iterator();
         while(iter.hasNext()) {
@@ -66,6 +70,10 @@ public class JinYongsJiangHu {
         }
         System.out.println("Character relation graph finishes successfully...");
 
+        System.out.println("PageRank begins...");
+        pageRank(crg, 10, 0.85, args[2]);
+        System.out.println("PageRank finishes successfully...");
+
         System.out.println(
                 "**************************************************************" + '\n' +
                 "*** Analyse the relation of characters in JinYong's novels. **" + '\n' +
@@ -81,7 +89,7 @@ public class JinYongsJiangHu {
      * @param namesFile the file of character names
      * @return cil(character interaction list), ArrayList<ArrayList<String>>
      */
-    private static ArrayList<ArrayList<String>> characterInteractionList(String novelsPath, String namesFile) {
+    private static ArrayList<ArrayList<String>> characterInteractionList(String namesFile, String novelsPath) {
         // Insert the names into the dictionary
         File file = new File(namesFile);
         try {
@@ -182,5 +190,49 @@ public class JinYongsJiangHu {
             }
         }
         return crg;
+    }
+
+    /**
+     * Page Rank
+     * @param crg Character Relation Graph, ArrayList<Pair<String,Double>>>
+     * @param times the times of iteration
+     * @param output the name of output file
+     */
+    static void pageRank(Map<String, ArrayList<Pair<String,Double>>> crg, int times, double d, String output) {
+        // GraphBuilder
+        Map<String, ArrayList<String>> graph = new HashMap();
+        for(Map.Entry<String, ArrayList<Pair<String, Double>>> e : crg.entrySet()) {
+            String key = e.getKey();
+            ArrayList<Pair<String, Double>> value = e.getValue();
+            ArrayList<String> valueOut = new ArrayList();
+            for(Pair<String, Double> pair : value) {
+                valueOut.add(pair.getFirst());
+            }
+            graph.put(key, valueOut);
+        }
+        // PageRankIter
+        Map<String, Double> pageRank = new HashMap();
+        for(String key : graph.keySet()) {
+            pageRank.put(key, 1.0);
+        }
+        for(int i = 0; i < times; ++i) {
+            for(String key : graph.keySet()) {
+                double pr = 1 - d;
+                for(String target : graph.get(key)) {
+                    pr += pageRank.get(target) / graph.get(target).size();
+                }
+                pageRank.put(key, pr);
+            }
+        }
+        // PageRankViewer
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(output);
+            for(Map.Entry<String, Double> e : pageRank.entrySet()) {
+                writer.write(e.getKey() + "\t" + e.getValue() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
