@@ -94,6 +94,10 @@ public class JinYongsJiangHu {
         pageRank(crg, 10, 0.85, args[2]);
         System.out.println("PageRank finishes successfully...");
 
+        System.out.println("LabelPropagation begins...");
+        labelPropagation(crg, 10, args[2]);
+        System.out.println("LabelPropagation finishes successfully...");
+
         System.out.println(
                 "**************************************************************" + '\n' +
                 "*** Analyse the relation of characters in JinYong's novels. **" + '\n' +
@@ -101,11 +105,11 @@ public class JinYongsJiangHu {
                 "********** Good bye, JinYong's JiangHu (Standalone) **********" + '\n' +
                 "**************************************************************" + '\n'
         );
-        
+
         if (timer) {
             long tEnd = System.currentTimeMillis();
             long tDelta = tEnd - tStart;
-            System.out.println("\nThe elapsed time is " + tDelta / 1000.0 + ".\n");
+            System.out.println("\nThe elapsed time is " + tDelta / 1000.0 + "s.\n");
         }
     }
 
@@ -245,7 +249,7 @@ public class JinYongsJiangHu {
             for(String key : graph.keySet()) {
                 double pr = 1 - d;
                 for(String target : graph.get(key)) {
-                    pr += pageRank.get(target) / graph.get(target).size();
+                    pr += d * pageRank.get(target) / graph.get(target).size();
                 }
                 pageRank.put(key, pr);
             }
@@ -262,6 +266,79 @@ public class JinYongsJiangHu {
             PrintWriter writer = new PrintWriter(outputPath + "/PageRank", "UTF-8");
             for(Map.Entry<String, Double> e : list) {
                 writer.println(e.getKey() + "\t" + e.getValue());
+            }
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Community Detection / Label Propagation
+     * @param crg Character Relation Graph
+     * @param times the times of iteration
+     * @param outputPath the string of output path
+     */
+    private static void labelPropagation(Map<String, ArrayList<Pair<String,Double>>> crg, int times, String outputPath) {
+        // GraphBuilder
+        Map<String, List<String>> graph = new HashMap();
+        for(Map.Entry<String, ArrayList<Pair<String, Double>>> e : crg.entrySet()) {
+            String keyOut = e.getKey();
+            ArrayList<Pair<String, Double>> value = e.getValue();
+            List<String> valueOut = new ArrayList();
+            for(Pair<String, Double> pair : value) {
+                valueOut.add(pair.getFirst());
+            }
+            graph.put(keyOut, valueOut);
+        }
+        // LabelPropagationIter
+        Map<String, String> label = new HashMap();
+        for(String key : graph.keySet()) {
+            label.put(key, key);
+        }
+        for(int i = 0; i < times; ++i) {
+            for(String key : label.keySet()) {
+                Map<String, Integer> map = new HashMap();
+                for(String target : graph.get(key)) {
+                    String targetLabel = label.get(target);
+                    Integer value = map.get(targetLabel);
+                    map.put(targetLabel, value == null ? 1 : value + 1);
+                }
+                Map.Entry<String, Integer> max = null;
+                for(Map.Entry<String, Integer> e : map.entrySet()) {
+                    if (max == null || e.getValue() > max.getValue())
+                        max = e;
+                }
+                // System.out.println(key + ":" + max.getKey());
+                label.put(key, max.getKey());
+            }
+        }
+        // LabelPropagationViewer
+        Map<String, List<String>> community = new HashMap();
+        for(Map.Entry<String, String> e : label.entrySet()) {
+            String keyOut = e.getValue();
+            List<String> valueOut = community.get(keyOut);
+            if (valueOut == null) {
+                valueOut = new ArrayList<>();
+            }
+            valueOut.add(e.getKey());
+            community.put(keyOut, valueOut);
+        }
+        // Output the result to the given file
+        try {
+            PrintWriter writer = new PrintWriter(outputPath + "/LabelPropagation", "UTF-8");
+            for(Map.Entry<String, List<String>> e : community.entrySet()) {
+                writer.print(e.getKey() + ":");
+                Iterator<String> iter = e.getValue().iterator();
+                if (iter.hasNext()) {
+                    writer.print(iter.next());
+                }
+                while(iter.hasNext()) {
+                    writer.print("," + iter.next());
+                }
+                writer.print("\n");
             }
             writer.close();
         } catch (FileNotFoundException e) {
