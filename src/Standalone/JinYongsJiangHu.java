@@ -26,47 +26,59 @@ public class JinYongsJiangHu {
                 "**************************************************************" + '\n'
         );
 
-        if (args.length < 2) {
-            System.err.println("usage: JinYong'sJiangHu <character_list> <novels> <out>");
+        boolean debug = true;
+        if (args.length < 3) {
+            System.err.println("usage: JinYong'sJiangHu <character_list> <novels> <out> [<debug>]");
             System.exit(2);
+        } else if (args.length == 3) {
+            debug = true;
+        } else if (args.length == 4) {
+            debug = Boolean.parseBoolean(args[3]);
         }
 
         System.out.println("Character interaction list begins...");
         ArrayList<ArrayList<String>> cil = characterInteractionList(args[0], args[1]);
-        System.out.println("Character interaction list prints below...");
-        Iterator<ArrayList<String>> iter = cil.iterator();
-        while(iter.hasNext()) {
-            Iterator<String> jter = iter.next().iterator();
-            while(jter.hasNext()) {
-                System.out.print(jter.next() + " ");
+        if (debug) {
+            System.out.println("Character interaction list prints below...");
+            Iterator<ArrayList<String>> iter = cil.iterator();
+            while (iter.hasNext()) {
+                Iterator<String> jter = iter.next().iterator();
+                while (jter.hasNext()) {
+                    System.out.print(jter.next() + " ");
+                }
+                System.out.print("\n");
             }
-            System.out.print("\n");
         }
         System.out.println("Character interaction list finishes successfully...");
 
         System.out.println("Character co-occurrence matrix begins...");
         Map<Pair<String, String>, Integer> ccm = characterCooccurrenceMatrix(cil);
-        System.out.println("Character co-occurrence matrix prints below...");
-        for(Map.Entry<Pair<String, String>, Integer> e : ccm.entrySet()) {
-            System.out.println("<" + e.getKey().getFirst() + "," + e.getKey().getSecond() + ">\t" + e.getValue());
+        if (debug) {
+            System.out.println("Character co-occurrence matrix prints below...");
+            for (Map.Entry<Pair<String, String>, Integer> e : ccm.entrySet()) {
+                System.out.println("<" + e.getKey().getFirst() + "," + e.getKey().getSecond() + ">\t" + e.getValue());
+            }
         }
         System.out.println("Character co-occurrence matrix finishes successfully...");
 
         System.out.println("Character relation graph begins...");
         Map<String, ArrayList<Pair<String, Double>>> crg = characterRelationGraph(ccm);
-        for(Map.Entry<String, ArrayList<Pair<String, Double>>> e : crg.entrySet()) {
-            String key = e.getKey();
-            System.out.print(key + ":");
-            Iterator<Pair<String, Double>> iter1 = e.getValue().iterator();
-            if (iter1.hasNext()) {
-                Pair pair = iter1.next();
-                System.out.print(pair.getFirst() + "," + pair.getSecond());
+        if (debug) {
+            System.out.println("Character relation graph prints below...");
+            for (Map.Entry<String, ArrayList<Pair<String, Double>>> e : crg.entrySet()) {
+                String key = e.getKey();
+                System.out.print(key + ":");
+                Iterator<Pair<String, Double>> iter1 = e.getValue().iterator();
+                if (iter1.hasNext()) {
+                    Pair pair = iter1.next();
+                    System.out.print(pair.getFirst() + "," + pair.getSecond());
+                }
+                while (iter1.hasNext()) {
+                    Pair pair = iter1.next();
+                    System.out.print(";" + pair.getFirst() + "," + pair.getSecond());
+                }
+                System.out.print("\n");
             }
-            while(iter1.hasNext()) {
-                Pair pair = iter1.next();
-                System.out.print(";" + pair.getFirst() + "," + pair.getSecond());
-            }
-            System.out.print("\n");
         }
         System.out.println("Character relation graph finishes successfully...");
 
