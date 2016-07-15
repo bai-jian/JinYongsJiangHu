@@ -1,6 +1,12 @@
-# input, novels and people name lists
+# the inherit directories and files in the IDE Intellij IDEA
+.idea/
+out/
+
+# input, novels and people name lists, and output
 input/
 testInput/
+output/
+
 
 # this file .gitignore
 .gitignore
