@@ -4,7 +4,9 @@
 /src/META-INF/
 
 # input(novels and people name lists) and output, and its smaple
-/input/
+# /input/
+/input/novels/
+# /input/people_name_list.txt
 /inputSample/
 /output/
 /outputSample/
