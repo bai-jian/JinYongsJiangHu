@@ -1,8 +1,6 @@
-# JinYong's JiangHu
+# 金庸的江湖 / JinYong's JiangHu
 
-Analyse the relation of characters in JinYong's novels.
-
-![](./assets/Result02.jpg)
+![Analyse the relation of characters in JinYong's novels](./assets/Result02.jpg)
 
 ## Introduction
 
@@ -19,6 +17,23 @@ Analyse the relation of characters in JinYong's novels.
 + NLP: Segmentation / [ansj_seg5.0.0](https://github.com/NLPchina/ansj_seg)
 + Data Visualization: Word Cloud / [Tagxedo](http://www.tagxedo.com/), Graph Viz / [Gephi](https://gephi.org/)
 
-### Time Cost
+## Run
 
+### Arguments for MapReduce
+
+> 
+
+## Data Visualization
+
+### PageRank - Word Cloud
+
+![](./assets/PageRank/PageRank2.4.jpg)
+![](./assets/PageRank/PageRank3.1.jpg)
+
+### CommunityGraph - Graph Viz
+
+![](./assets/CommunityGraph/screenshot5.0.png)
+![](./assets/CommunityGraph/screenshot5.1.png)
+![](./assets/CommunityGraph/screenshot5.2.png)
+![](./assets/CommunityGraph/screenshot5.3.png)
 
