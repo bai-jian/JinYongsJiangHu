@@ -2,11 +2,7 @@
 
 Analyse the relation of characters in JinYong's novels.
 
-***
-
-## Development
-
-### Development Environment & Tools
+## Development Environment & Tools
 
 + Ubuntu Kylin 15.10
 + [IntelliJ IDEA Community Edition 2016.1](https://www.jetbrains.com/idea/download/#section=linux)
