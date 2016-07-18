@@ -27,13 +27,23 @@
 
 ### PageRank - Word Cloud
 
+阴阳八卦 Word Cloud
 ![](./assets/PageRank/PageRank2.4.jpg)
+
+郭靖/黄蓉 Word Cloud
 ![](./assets/PageRank/PageRank3.1.jpg)
 
 ### CommunityGraph - Graph Viz
 
+整体图
 ![](./assets/CommunityGraph/screenshot5.0.png)
+
+局部图1
 ![](./assets/CommunityGraph/screenshot5.1.png)
+
+局部图2
 ![](./assets/CommunityGraph/screenshot5.2.png)
+
+局部图3
 ![](./assets/CommunityGraph/screenshot5.3.png)
 
