@@ -1,12 +1,13 @@
 # the inherit directories and files in the IDE Intellij IDEA
-.idea/
-out/
+/.idea/
+/out/
+/src/META-INF/
 
-# input, novels and people name lists, and output
-input/
-testInput/
-output/
-
+# input(novels and people name lists) and output, and its smaple
+/input/
+/inputSample/
+/output/
+/outputSmaple/
 
 # this file .gitignore
-.gitignore
+# .gitignore
