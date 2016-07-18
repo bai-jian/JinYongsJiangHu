@@ -1,4 +1,4 @@
-package JinYongsJiangHu;
+package MapReduce;
 
 
 import org.apache.commons.math3.util.Pair;

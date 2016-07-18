@@ -1,4 +1,4 @@
-package JinYongsJiangHu.LabelPropagation;
+package MapReduce.PageRank;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -13,14 +13,14 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import java.io.IOException;
 
 /**
- * Created by lubuntu on 16-7-12.
+ * Created by lubuntu on 16-7-11.
  */
 public class GraphBuilder {
 
-    static class GraphBuilderMapper extends Mapper<Text, Text, Text, Text> {
+    static class GraphBuildMapper extends Mapper<Text, Text, Text, Text> {
         public void map(Text key, Text value, Context context)
                 throws IOException, InterruptedException {
-            StringBuilder strBuilder = new StringBuilder(key.toString());
+            StringBuilder strBuilder = new StringBuilder("1.0");
             String[] pairs = value.toString().split(",");
             for(String pair : pairs) {
                 strBuilder.append("," + pair.split(":")[0]);
@@ -35,16 +35,16 @@ public class GraphBuilder {
             Configuration conf = new Configuration();
             String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
             if (otherArgs.length < 2) {
-                System.err.println("usage: LabelPropagation.GraphBuilder <in> <out>");
-                System.exit(2);
+                System.err.println("usage: GraphBuilder <in> <out>");
+                System.exit(0);
             }
-            Job job = new Job(conf, "JinYongsJiangHu_Job5_LabelPropagation.GraphBuilder");
+            Job job = new Job(conf, "JinYongsJiangHu_Job4_PageRank.GraphBuilder");
             job.setJarByClass(GraphBuilder.class);
-            FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
             job.setInputFormatClass(KeyValueTextInputFormat.class);
-            job.setMapperClass(GraphBuilderMapper.class);
+            job.setMapperClass(GraphBuildMapper.class);
             job.setMapOutputKeyClass(Text.class);
             job.setMapOutputValueClass(Text.class);
+            FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
             FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
             job.waitForCompletion(true);
         } catch (IOException e) {
@@ -55,4 +55,5 @@ public class GraphBuilder {
             e.printStackTrace();
         }
     }
+
 }

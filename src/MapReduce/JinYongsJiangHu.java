@@ -1,12 +1,12 @@
-package JinYongsJiangHu;
+package MapReduce;
 
-import JinYongsJiangHu.LabelPropagation.LabelPropagationDriver;
-import JinYongsJiangHu.PageRank.PageRankDriver;
+import MapReduce.LabelPropagation.LabelPropagationDriver;
+import MapReduce.PageRank.PageRankDriver;
 
 /**
  * Created by lubuntu on 16-7-5.
  */
-public class Driver {
+public class JinYongsJiangHu {
 
     public static void main(String[] args) {
         long tStart = System.currentTimeMillis();

@@ -1,4 +1,4 @@
-package JinYongsJiangHu.LabelPropagation;
+package MapReduce.LabelPropagation;
 
 
 /**

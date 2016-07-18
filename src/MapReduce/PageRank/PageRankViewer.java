@@ -1,4 +1,4 @@
-package JinYongsJiangHu.PageRank;
+package MapReduce.PageRank;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;

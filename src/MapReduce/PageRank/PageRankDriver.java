@@ -1,4 +1,4 @@
-package JinYongsJiangHu.PageRank;
+package MapReduce.PageRank;
 
 /**
  * Created by lubuntu on 16-7-11.
