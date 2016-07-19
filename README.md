@@ -20,6 +20,7 @@ In this project, two programming models are used as below:
 + Standalone: a single-threaded program.
 
 |Run NO.|Standalone|MapReduce / Pseudo Distribution|MapReduce / Cluster|
+|:-:|:-:|:-:|:-:|
 |NO.1|8.169s|48.191s|13min13s|
 |NO.2|9.615s|50.195s||
 |NO.3|9.817s|51.311s||
