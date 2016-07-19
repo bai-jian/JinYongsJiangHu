@@ -10,7 +10,7 @@
 
 流程图如下图所示：
 
-![Flow Chart](./assets/FlowChart.png)
+<img src="./assets/FlowChart.png" width="50%" height="50%"/>
 
 ## Programming Model
 
