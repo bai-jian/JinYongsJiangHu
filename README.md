@@ -19,11 +19,25 @@
 
 ## Run
 
-### Arguments for MapReduce
+### Arguments for Standalone
 
-> 
+> $java -jar JinYong\'sJiangHu <character_list> <novels> <out> [<debug> <timer>]
 
-## Data Visualization
+examples:
+
+> $java -jar JinYong\'sJiangHu ./input/people_name_list.txt ./input/novels/ ./output/Standalone false true
+
+> $java -jar JinYong\'sJiangHu ./inputSample/people_name_list.txt ./inputSample/novels/
+
+### Arguments for MapReduce / Pseudo Distribution
+
+> <character_list> <novels> <out>
+
+### Argumetns for MapReduce / Cluster
+
+>
+
+## Last: Data Visualization
 
 ### PageRank - Word Cloud
 
