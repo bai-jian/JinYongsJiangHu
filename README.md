@@ -47,6 +47,10 @@ examples:
 
 In **CLI** environment:
 
+> hadoop jar JinYong\'sJiangHu.jar \<character_list\> \<novels\> \<out\>
+
+examples:
+
 > hadoop jar JinYong\'sJiangHu.jar ./input/people_name_list.txt /data/task2 temp
 
 ## Last: Data Visualization
