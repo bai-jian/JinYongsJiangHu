@@ -21,7 +21,7 @@
 
 ### Arguments for Standalone
 
-> $java -jar JinYong\'sJiangHu <character_list> <novels> <out> [<debug> <timer>]
+> $java -jar JinYong\'sJiangHu \<character_list\> \<novels\> \<out\> [\<debug\> \<timer\>]
 
 examples:
 
