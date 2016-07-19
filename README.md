@@ -6,7 +6,24 @@
 
 数据集包括金庸的14部小说（飞雪连天射白鹿，笑书神侠倚碧鸳）以及手动标注的小说人物名列表文件（/input/people_list_name.txt）。
 
-基于此数据集，分析小说人物关系，包括PageRank计算，社区发现等。
+基于此数据集，提取人物互动关系，统计人物同现次数，构建人物关系图，分析小说人物关系，包括PageRank计算，社区发现等。
+
+流程图如下图所示：
+
+![Flow Chart](./assets/FlowChart.png)
+
+## Programming Model
+
+In this project, two programming models are used as below:
+
++ MapReduce
++ Standalone: a single-threaded program.
+
+|Run NO.|Standalone|MapReduce / Pseudo Distribution|MapReduce / Cluster|
+|NO.1|8.169s|48.191s|13min13s|
+|NO.2|9.615s|50.195s||
+|NO.3|9.817s|51.311s||
+|AVG|9.200s|49.899s|13min13s|
 
 ## Development Environment & Tools
 
