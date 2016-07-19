@@ -21,21 +21,33 @@
 
 ### Arguments for Standalone
 
+In **CLI** environment:
+
 > $java -jar JinYong\'sJiangHu \<character_list\> \<novels\> \<out\> [\<debug\> \<timer\>]
 
 examples:
 
 > $java -jar JinYong\'sJiangHu ./input/people_name_list.txt ./input/novels/ ./output/Standalone false true
 
-> $java -jar JinYong\'sJiangHu ./inputSample/people_name_list.txt ./inputSample/novels/
+> $java -jar JinYong\'sJiangHu ./inputSample/people_name_list.txt ./inputSample/novels/ ./outputSample/Standalone
 
 ### Arguments for MapReduce / Pseudo Distribution
 
-> <character_list> <novels> <out>
+In **Intellij IDEA**:
+
+> \<character_list\> \<novels\> \<out\>
+
+examples:
+
+> ./input/people_name_list.txt ./input/novels/ ./output/MapReduce
+
+> ./inputSample/people_name_list.txt ./inputSample/novels/ ./outputSample/MapReduce
 
 ### Argumetns for MapReduce / Cluster
 
->
+In **CLI** environment:
+
+> hadoop jar JinYong\'sJiangHu.jar ./input/people_name_list.txt /data/task2 temp
 
 ## Last: Data Visualization
 
