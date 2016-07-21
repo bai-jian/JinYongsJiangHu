@@ -5,8 +5,8 @@ package MapReduce.PageRank;
  */
 public class PageRankDriver {
 
+    // Loop ends with the condition of times
     private static int times = 10;
-
     public static void main(String[] args) {
         if (args.length < 4) {
             System.err.println("usage: PageRankDriver <in> <mid> <out-1> <out-2>");
@@ -31,4 +31,25 @@ public class PageRankDriver {
         String[] args4PageRankViewer = {args[2], args[3]};
         PageRankViewer.main(args4PageRankViewer);
     }
+
+
+    /* Still has some bugs
+    // Loop ends with the condition of threshold
+    private static double threshold = 0.01;
+    public static void main(String[] args) {
+        if (args.length < 4) {
+            System.err.println("usage: PageRankDriver <in> <mid> <out-1> <out-2>");
+            System.exit(2);
+        }
+        System.out.println("PageRank.GraphBuilder");
+        String[] args4GraphBuilder = {args[0], args[1] + "0"};
+        GraphBuilder.main(args4GraphBuilder);
+        System.out.println("PageRank.PageRankIter");
+        String[] args4PageRankIter = {args[1], args[2], "0.01"};
+        PageRankIter.main(args4PageRankIter);
+        System.out.println("PageRank.PageRankViewer");
+        String[] args4PageRankViewer = {args[2], args[3]};
+        PageRankViewer.main(args4PageRankViewer);
+    }
+    */
 }
