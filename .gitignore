@@ -2,14 +2,17 @@
 /.idea/
 /out/
 /src/META-INF/
+JinYong'sJiangHu.iml
 
 # input(novels and people name lists) and output, and its smaple
 # /input/
 /input/novels/
 # /input/people_name_list.txt
 /inputSample/
+/out/
 /output/
 /outputSample/
+
 
 # this file .gitignore
 # .gitignore
